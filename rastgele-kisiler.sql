@@ -1,5 +1,7 @@
 CREATE TABLE Kisiler(
 id INT PRIMARY KEY NOT NULL IDENTITY(1,1),
 isim VARCHAR(100),
-soyisim VARCHAR(100)
+soyisim VARCHAR(100),
+sehirid INT,
+ilceid INT
 )
