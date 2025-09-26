@@ -3,8 +3,6 @@ id INT PRIMARY KEY NOT NULL IDENTITY(1,1),
 isim VARCHAR(100)
 )
 
-
-
 INSERT INTO Isimler VALUES ('Abdullah');
 INSERT INTO Isimler VALUES ('Abdurrahman');
 INSERT INTO Isimler VALUES ('Abdülâlim');
