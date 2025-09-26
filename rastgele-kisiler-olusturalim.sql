@@ -8,10 +8,13 @@ dogumtarihi DATE
 )
 
 
-
+DECLARE @Isim VARCHAR(100)
 DECLARE @IsimSayisi INT
+DECLARE @Soyisim VARCHAR(100)
 DECLARE @SoyisimSayisi INT
 DECLARE @IlceSayisi INT
+DECLARE @SehirId INT
+DECLARE @IlceId INT
 DECLARE @Rastgele AS INT
 DECLARE @DogumTarihi AS DATE
 
@@ -22,14 +25,15 @@ SELECT @SoyisimSayisi = COUNT(*) FROM Soyisimler
 SELECT @IlceSayisi = COUNT(*) FROM Ilceler
 
 SET @Rastgele = RAND() * @IsimSayisi
-SELECT * FROM Isimler WHERE id = @Rastgele
+SELECT @Isim = isim FROM Isimler WHERE id = @Rastgele
 
 SET @Rastgele = RAND() * @SoyisimSayisi
-SELECT * FROM Soyisimler WHERE id = @Rastgele
+SELECT @Soyisim = soyisim FROM Soyisimler WHERE id = @Rastgele
 
 SET @Rastgele = RAND() * @IlceSayisi
-SELECT * FROM Ilceler WHERE id = @Rastgele
+SELECT @SehirId = sehirid, @IlceId = id FROM Ilceler WHERE id = @Rastgele
 
 SET @Rastgele = RAND() * 365 * 80
 SET @DogumTarihi = GETDATE() - @Rastgele
-SELECT @DogumTarihi
+
+INSERT INTO Kisiler (isim, soyisim, sehirid, ilceid, dogumtarihi) VALUES (@Isim, @Soyisim, @SehirId, @IlceId, @DogumTarihi)
