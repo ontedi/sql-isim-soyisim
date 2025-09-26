@@ -1,7 +1,7 @@
 CREATE TABLE Ilceler(
 id INT PRIMARY KEY NOT NULL IDENTITY(1,1),
-sehirid INT,
-ilce VARCHAR(100)
+ilce VARCHAR(100),
+sehirid INT
 )
 
 
