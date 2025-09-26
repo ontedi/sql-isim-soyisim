@@ -1,1 +1,5 @@
-aa
+CREATE TABLE Kisiler(
+id INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+isim VARCHAR(100),
+soyisim VARCHAR(100)
+)
