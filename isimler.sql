@@ -275,7 +275,6 @@ INSERT INTO Isimler VALUES ('Bekâm');
 INSERT INTO Isimler VALUES ('Bekdemir');
 INSERT INTO Isimler VALUES ('Bekdil');
 INSERT INTO Isimler VALUES ('Bekem');
-
 INSERT INTO Isimler VALUES ('Bige');
 INSERT INTO Isimler VALUES ('Bigüm');
 INSERT INTO Isimler VALUES ('Bihin');
