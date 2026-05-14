@@ -8,37 +8,42 @@ dogumtarihi DATE
 )
 
   
-DECLARE @SAYAC INT = 0
-WHILE @SAYAC < 1000000
+DECLARE @SAYAC1 INT = 0
+DECLARE @SAYAC2 INT = 0
+
+WHILE @SAYAC1 < 50
 BEGIN
-   DECLARE @Isim VARCHAR(100)
-   DECLARE @IsimSayisi INT
-   DECLARE @Soyisim VARCHAR(100)
-   DECLARE @SoyisimSayisi INT
-   DECLARE @IlceSayisi INT
-   DECLARE @SehirId INT
-   DECLARE @IlceId INT
-   DECLARE @Rastgele AS INT
-   DECLARE @DogumTarihi AS DATE
 
-   SELECT @IsimSayisi = COUNT(*) FROM Isimler
+	WHILE @SAYAC2 < 100000
+	BEGIN
+		DECLARE @ToplamIsim INT
+		DECLARE @RastgeleIsim VARCHAR(100)
+		DECLARE @RastgeleIsimId INT
+		DECLARE @ToplamSoyisim INT
+		DECLARE @RastgeleSoyisim VARCHAR(100)
+		DECLARE @RastgeleSoyisimId INT
+		DECLARE @RastgeleSehirId INT
+		DECLARE @ToplamIlce INT
+		DECLARE @RastgeleIlceId INT
+		DECLARE @RastgeleDogumTarihi DATE
+		
+		SELECT @ToplamIsim = COUNT(*) FROM Isimler
+		SET @RastgeleIsimId = RAND() * @ToplamIsim
+		SELECT @RastgeleIsim = isim FROM Isimler WHERE id = @RastgeleIsimId
 
-   SELECT @SoyisimSayisi = COUNT(*) FROM Soyisimler
+		SELECT @ToplamSoyisim = COUNT(*) FROM Soyisimler
+		SET @RastgeleSoyisimId = RAND() * @ToplamSoyisim
+		SELECT @RastgeleSoyisim = soyisim FROM Soyisimler WHERE id = @RastgeleSoyisimId
 
-   SELECT @IlceSayisi = COUNT(*) FROM Ilceler
+		SELECT @ToplamIlce = COUNT(*) FROM Ilceler
+		SET @RastgeleIlceId = RAND() * @ToplamIlce
+		SELECT @RastgeleSehirId = sehirid, @RastgeleIlceId = id FROM Ilceler WHERE id = @RastgeleIlceId
 
-   SET @Rastgele = RAND() * @IsimSayisi
-   SELECT @Isim = isim FROM Isimler WHERE id = @Rastgele
+		SET @RastgeleDogumTarihi = GETDATE() - (RAND() * 365 * 80)
 
-   SET @Rastgele = RAND() * @SoyisimSayisi
-   SELECT @Soyisim = soyisim FROM Soyisimler WHERE id = @Rastgele
+		INSERT INTO Kisiler (isim, soyisim, sehirid, ilceid, dogumtarihi) VALUES (@RastgeleIsim, @RastgeleSoyisim, @RastgeleSehirId, @RastgeleIlceId, @RastgeleDogumTarihi)
+		SET @SAYAC2 = @SAYAC2 + 1
+	END
 
-   SET @Rastgele = RAND() * @IlceSayisi
-   SELECT @SehirId = sehirid, @IlceId = id FROM Ilceler WHERE id = @Rastgele
-
-   SET @Rastgele = RAND() * 365 * 80
-   SET @DogumTarihi = GETDATE() - @Rastgele
-
-   INSERT INTO Kisiler (isim, soyisim, sehirid, ilceid, dogumtarihi) VALUES (@Isim, @Soyisim, @SehirId, @IlceId, @DogumTarihi)
-   SET @SAYAC = @SAYAC + 1
+	SET @SAYAC1 = @SAYAC1 + 1
 END
