@@ -47,3 +47,20 @@ BEGIN
 
 	SET @SAYAC1 = @SAYAC1 + 1
 END
+
+
+/*
+DECLARE @Baslangic BIGINT
+DECLARE @Bitis BIGINT
+DECLARE @Fark BIGINT
+SET @Baslangic = FORMAT(GETDATE(), 'HHmmssfff')
+SELECT * FROM Kisiler AS k
+INNER JOIN Ilceler AS i ON k.ilceid = i.id 
+WHERE 
+k.isim LIKE '%z%' AND k.soyisim LIKE '%ç%' AND (dogumtarihi > '1988-08-01' or dogumtarihi < '2001-07-16')
+AND
+i.ilce LIKE '%z%'
+SET @Bitis = FORMAT(GETDATE(), 'HHmmssfff')
+SET @Fark = @Bitis - @Baslangic
+SELECT ('Başlangıç: '  + CAST(@Baslangic as varchar(20))) BASLANGIC, ('Bitiş: '  + CAST(@Bitis as varchar(20))) BITIS, ('Fark: ' + CAST(@Fark as varchar(20))) FARK
+*/
