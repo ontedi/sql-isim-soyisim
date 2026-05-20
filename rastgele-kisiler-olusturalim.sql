@@ -50,17 +50,17 @@ END
 
 
 /*
-DECLARE @Baslangic BIGINT
-DECLARE @Bitis BIGINT
-DECLARE @Fark BIGINT
-SET @Baslangic = FORMAT(GETDATE(), 'HHmmssfff')
+DECLARE @BaslangicTarihi DATETIME
+DECLARE @BitisTarihi DATETIME
+DECLARE @Fark INT
+SET @BaslangicTarihi = format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff')
 SELECT * FROM Kisiler AS k
 INNER JOIN Ilceler AS i ON k.ilceid = i.id 
 WHERE 
-k.isim LIKE '%z%' AND k.soyisim LIKE '%ç%' AND (dogumtarihi > '1988-08-01' or dogumtarihi < '2001-07-16')
+k.isim LIKE '%g%' AND k.isim not in ('e') AND k.soyisim LIKE '%ad%' --AND (dogumtarihi > '1988-08-01' or dogumtarihi < '2001-07-16')
 AND
 i.ilce LIKE '%z%'
-SET @Bitis = FORMAT(GETDATE(), 'HHmmssfff')
-SET @Fark = @Bitis - @Baslangic
-SELECT ('Başlangıç: '  + CAST(@Baslangic as varchar(20))) BASLANGIC, ('Bitiş: '  + CAST(@Bitis as varchar(20))) BITIS, ('Fark: ' + CAST(@Fark as varchar(20))) FARK
+SET @BitisTarihi = format(getdate(), 'yyyy-MM-dd HH:mm:ss.fff')
+SET @Fark = DATEDIFF(MILLISECOND, @BaslangicTarihi, @BitisTarihi)
+SELECT ('Başlangıç: '  + CONVERT(VARCHAR(24), @BaslangicTarihi, 121)) BASLANGIC, ('Bitiş: '  + CONVERT(VARCHAR(24), @BitisTarihi, 121)) BITIS, ('Fark: ' + CAST(@Fark as varchar(20)) + ' milisaniye') FARK
 */
